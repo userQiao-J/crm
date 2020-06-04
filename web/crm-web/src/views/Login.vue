@@ -1,6 +1,11 @@
 <template>
   <div>
-    <el-form :rules="rules" :model="loginForm" class="loginContainer">
+    <el-form
+      :rules="rules"
+      :model="loginForm"
+      ref="loginForm"
+      class="loginContainer"
+    >
       <h3 class="loginTile">欢迎使用CRM管理系统</h3>
       <el-form-item prop="username">
         <el-input
@@ -18,7 +23,15 @@
           placeholder="请输入密码"
         />
       </el-form-item>
-      <el-button type="primary" style="width: 100%">登录</el-button>
+      <el-button type="primary" style="width: 100%" @click="doLogin"
+        >登录</el-button
+      >
+      <el-alert
+        type="error"
+        :title="alertTitle"
+        v-if="isAlertShow"
+        class="elalert"
+      />
     </el-form>
   </div>
 </template>
@@ -32,6 +45,8 @@ export default {
         username: "",
         password: ""
       },
+      alertTitle: "",
+      isAlertShow: false,
       rules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" }
@@ -46,6 +61,20 @@ export default {
         ]
       }
     };
+  },
+  methods: {
+    doLogin() {
+      this.isAlertShow = false;
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          alert("成功");
+        } else {
+          this.alertTitle = "请填写完整信息";
+          this.isAlertShow = true;
+          return false;
+        }
+      });
+    }
   }
 };
 </script>
@@ -64,5 +93,8 @@ export default {
 .loginTile {
   margin: 15px auto 20px auto;
   text-align: center;
+}
+.elalert {
+  margin-top: 10px;
 }
 </style>
