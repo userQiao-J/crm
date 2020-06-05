@@ -12,7 +12,9 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  * @date 2020/06/04
  */
 public class PinyinUtil {
-    /**名字长度*/
+    /**
+     * 名字长度
+     */
     private static int NAME_LENGTH = 3;
 
     /**
@@ -68,6 +70,7 @@ public class PinyinUtil {
 
     /**
      * 返回中文的首字母
+     *
      * @param str 字符串
      * @return 首字母
      */
