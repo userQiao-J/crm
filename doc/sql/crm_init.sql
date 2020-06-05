@@ -74,7 +74,35 @@ values (3, '系统管理员', '18568887789', '029-82881234', '深圳南山', 1, 
         '$2a$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE.',
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1517070040185&di=be0375e0c3db6c311b837b28c208f318&imgtype=0&src=http%3A%2F%2Fimg2.soyoung.com%2Fpost%2F20150213%2F6%2F20150213141918532.jpg',
         NULL);
+/*角色表*/
+DROP TABLE IF EXISTS `role`;
 
+CREATE TABLE `role`
+(
+    `id`     int(11) NOT NULL AUTO_INCREMENT,
+    `name`   varchar(64) DEFAULT NULL,
+    `nameZh` varchar(64) DEFAULT NULL COMMENT '角色名称',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 22
+  DEFAULT CHARSET = utf8;
+
+/*Data for the table `role` */
+
+insert into `role`(`id`, `name`, `nameZh`)
+values (1, 'ROLE_manager', '部门经理'),
+       (2, 'ROLE_personnel', '人事专员'),
+       (3, 'ROLE_recruiter', '招聘主管'),
+       (4, 'ROLE_train', '培训主管'),
+       (5, 'ROLE_performance', '薪酬绩效主管'),
+       (6, 'ROLE_admin', '系统管理员'),
+       (13, 'ROLE_test2', '测试角色2'),
+       (14, 'ROLE_test1', '测试角色1'),
+       (17, 'ROLE_test3', '测试角色3'),
+       (18, 'ROLE_test4', '测试角色4'),
+       (19, 'ROLE_test4', '测试角色4'),
+       (20, 'ROLE_test5', '测试角色5'),
+       (21, 'ROLE_test6', '测试角色6');
 DROP TABLE IF EXISTS `user_role`;
 
 CREATE TABLE `user_role`
@@ -268,42 +296,16 @@ CREATE TABLE `oplog`
     `id`      int(11) NOT NULL AUTO_INCREMENT,
     `addDate` date         DEFAULT NULL COMMENT '添加日期',
     `operate` varchar(255) DEFAULT NULL COMMENT '操作内容',
-    `hrid`    int(11)      DEFAULT NULL COMMENT '操作员ID',
+    `userid`    int(11)      DEFAULT NULL COMMENT '操作员ID',
     PRIMARY KEY (`id`),
-    KEY `hrid` (`hrid`),
-    CONSTRAINT `oplog_ibfk_1` FOREIGN KEY (`hrid`) REFERENCES `hr` (`id`)
+    KEY `userid` (`userid`),
+    CONSTRAINT `oplog_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-/*角色表*/
-DROP TABLE IF EXISTS `role`;
 
-CREATE TABLE `role`
-(
-    `id`     int(11) NOT NULL AUTO_INCREMENT,
-    `name`   varchar(64) DEFAULT NULL,
-    `nameZh` varchar(64) DEFAULT NULL COMMENT '角色名称',
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 22
-  DEFAULT CHARSET = utf8;
 
-/*Data for the table `role` */
 
-insert into `role`(`id`, `name`, `nameZh`)
-values (1, 'ROLE_manager', '部门经理'),
-       (2, 'ROLE_personnel', '人事专员'),
-       (3, 'ROLE_recruiter', '招聘主管'),
-       (4, 'ROLE_train', '培训主管'),
-       (5, 'ROLE_performance', '薪酬绩效主管'),
-       (6, 'ROLE_admin', '系统管理员'),
-       (13, 'ROLE_test2', '测试角色2'),
-       (14, 'ROLE_test1', '测试角色1'),
-       (17, 'ROLE_test3', '测试角色3'),
-       (18, 'ROLE_test4', '测试角色4'),
-       (19, 'ROLE_test4', '测试角色4'),
-       (20, 'ROLE_test5', '测试角色5'),
-       (21, 'ROLE_test6', '测试角色6');
 DROP TABLE IF EXISTS `sysmsg`;
 
 CREATE TABLE `sysmsg`
@@ -311,20 +313,20 @@ CREATE TABLE `sysmsg`
     `id`    int(11) NOT NULL AUTO_INCREMENT,
     `mid`   int(11) DEFAULT NULL COMMENT '消息id',
     `type`  int(11) DEFAULT '0' COMMENT '0表示群发消息',
-    `hrid`  int(11) DEFAULT NULL COMMENT '这条消息是给谁的',
+    `userid`  int(11) DEFAULT NULL COMMENT '这条消息是给谁的',
     `state` int(11) DEFAULT '0' COMMENT '0 未读 1 已读',
     PRIMARY KEY (`id`),
-    KEY `hrid` (`hrid`),
+    KEY `userid` (`userid`),
     KEY `sysmsg_ibfk_1` (`mid`),
     CONSTRAINT `sysmsg_ibfk_1` FOREIGN KEY (`mid`) REFERENCES `msgcontent` (`id`),
-    CONSTRAINT `sysmsg_ibfk_2` FOREIGN KEY (`hrid`) REFERENCES `hr` (`id`)
+    CONSTRAINT `sysmsg_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `user` (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 82
   DEFAULT CHARSET = utf8;
 
 /*Data for the table `sysmsg` */
 
-insert into `sysmsg`(`id`, `mid`, `type`, `hrid`, `state`)
+insert into `sysmsg`(`id`, `mid`, `type`, `userid`, `state`)
 values (57, 14, 0, 3, 1),
        (58, 14, 0, 5, 1),
        (59, 14, 0, 10, 1),
