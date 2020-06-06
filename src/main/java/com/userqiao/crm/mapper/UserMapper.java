@@ -1,6 +1,8 @@
 package com.userqiao.crm.mapper;
 
 import com.userqiao.crm.model.User;
+import org.apache.ibatis.annotations.Param;
+
 /**
  * 用户 Mapper
  *
@@ -44,4 +46,6 @@ public interface UserMapper {
      * @return
      */
     int updateByPrimaryKey(User record);
+
+    User loadUserByUsername(@Param("username") String username);
 }
