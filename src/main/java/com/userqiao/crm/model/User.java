@@ -75,7 +75,7 @@ public class User implements UserDetails {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-
+    @Override
     public String getUsername() {
         return username;
     }
@@ -83,7 +83,7 @@ public class User implements UserDetails {
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
     }
-
+    @Override
     public String getPassword() {
         return password;
     }

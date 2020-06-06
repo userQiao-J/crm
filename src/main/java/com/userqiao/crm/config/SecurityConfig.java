@@ -53,9 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .loginProcessingUrl("/doLogin")   //配置登录请求的URL
+                //配置登录请求的URL
+                .loginProcessingUrl("/doLogin")
                 .loginPage("/login")
-                .successHandler(new AuthenticationSuccessHandler() {   //登录成功的回调地址
+                //登录成功的回调地址
+                .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse resp, Authentication authentication) throws IOException, ServletException {
                         resp.setContentType("application/json;charset=utf-8");
@@ -69,7 +71,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         out.close();
                     }
                 })
-                .failureHandler(new AuthenticationFailureHandler() {   //登录失败的回调地址
+                //登录失败的回调地址
+                .failureHandler(new AuthenticationFailureHandler() {
                     @Override
                     public void onAuthenticationFailure(HttpServletRequest req, HttpServletResponse resp, AuthenticationException e) throws IOException, ServletException {
                         resp.setContentType("application/json;charset=utf-8");

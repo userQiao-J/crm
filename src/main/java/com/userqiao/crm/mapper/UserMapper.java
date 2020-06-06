@@ -47,5 +47,10 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User record);
 
+    /**
+     * 根据用户名，查询出用户数据
+     * @param username
+     * @return
+     */
     User loadUserByUsername(@Param("username") String username);
 }

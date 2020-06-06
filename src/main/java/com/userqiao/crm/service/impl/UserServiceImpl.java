@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (ObjectUtil.isNull(user)){
             throw new UsernameNotFoundException("用户名不存在");
         }
-//        user.setPassword(null);
         return user;
     }
 }
