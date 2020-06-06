@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import { postKeyValueRequest } from "../utils/api";
+
 export default {
   name: "login",
   data() {
@@ -67,7 +69,11 @@ export default {
       this.isAlertShow = false;
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          alert("成功");
+          postKeyValueRequest("/doLogin", this.loginForm).then(resp => {
+            if (resp) {
+              this.$message.success("登录成功");
+            }
+          });
         } else {
           this.alertTitle = "请填写完整信息";
           this.isAlertShow = true;
