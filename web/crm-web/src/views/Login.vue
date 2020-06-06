@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import { postKeyValueRequest } from "../utils/api";
 
 export default {
   name: "login",
@@ -69,7 +68,7 @@ export default {
       this.isAlertShow = false;
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          postKeyValueRequest("/doLogin", this.loginForm).then(resp => {
+          this.postKeyValueRequest("/doLogin", this.loginForm).then(resp => {
             if (resp) {
               window.sessionStorage.setItem("user", JSON.stringify(resp.obj))
               this.$message.success("登录成功");
