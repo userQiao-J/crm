@@ -61,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         resp.setContentType("application/json;charset=utf-8");
                         PrintWriter out = resp.getWriter();
                         User user = (User) authentication.getPrincipal();
+                        user.setPassword(null);  //不将密码信息返回到前端
                         RespBean respBean = RespBean.ok("登录成功", user);
                         String s = new ObjectMapper().writeValueAsString(respBean);
                         out.write(s);
