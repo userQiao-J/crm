@@ -71,7 +71,9 @@ export default {
         if (valid) {
           postKeyValueRequest("/doLogin", this.loginForm).then(resp => {
             if (resp) {
+              window.sessionStorage.setItem("user", JSON.stringify(resp.obj))
               this.$message.success("登录成功");
+              this.$router.replace("/home");
             }
           });
         } else {
