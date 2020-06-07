@@ -37,7 +37,6 @@
 </template>
 
 <script>
-
 export default {
   name: "login",
   data() {
@@ -70,8 +69,11 @@ export default {
         if (valid) {
           this.postKeyValueRequest("/doLogin", this.loginForm).then(resp => {
             if (resp) {
-              window.sessionStorage.setItem("user", JSON.stringify(resp.obj))
-              this.$message.success("登录成功");
+              console.log(resp);
+              window.sessionStorage.setItem(
+                "user",
+                JSON.stringify(resp.object)
+              );
               this.$router.replace("/home");
             }
           });
