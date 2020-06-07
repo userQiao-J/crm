@@ -1,6 +1,10 @@
 package com.userqiao.crm.mapper;
 
 import com.userqiao.crm.model.Menu;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
 /**
  * 菜单 Mapper
  *
@@ -49,4 +53,11 @@ public interface MenuMapper {
      * @return
      */
     int updateByPrimaryKey(Menu record);
+
+    /**
+     * 根据当前用户，获取到用户所对应的菜单
+     * @param userId
+     * @return
+     */
+    List<Menu> getMenusByUserId(@Param("userId") Integer userId);
 }
