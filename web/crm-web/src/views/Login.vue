@@ -96,7 +96,7 @@ export default {
   margin: 13% 55%;
   width: 350px;
   padding: 35px 35px 15px 35px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid #eaeaea;
   box-shadow: 0 0 25px #cac6c6;
   position: fixed;
@@ -108,11 +108,11 @@ export default {
 .elalert {
   margin-top: 10px;
 }
-  .blackgroundImg{
-    background: url("../assets/loginbackground.jpg");
-    background-size: 100% 100%;
-    height: 100%;
-    position: fixed;
-    width: 100%
-  }
+.blackgroundImg {
+  background: url("../assets/loginbackground.jpg");
+  background-size: 100% 100%;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
 </style>
