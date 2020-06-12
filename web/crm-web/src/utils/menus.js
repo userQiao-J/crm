@@ -29,7 +29,10 @@ export const formatRoutes = routes => {
       meta: meta,
       children: children,
       component(resolve) {
-        require(["../views/" + component + ".vue"], resolve);
+        if (component.startsWith("Sys")) {
+          //根据组件名称获取到对应的项目目录
+          require(["../views/sys/" + component + ".vue"], resolve);
+        }
       }
     };
     fmRoutes.push(fmRouter);
