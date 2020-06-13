@@ -19,11 +19,8 @@
       <el-container>
         <el-aside width="200px">
           <el-menu router unique-opened>
-            <div
-              v-for="(item, index) in routes"
-              :key="index"
-            >
-              <el-submenu :index="index+''" v-if="!item.hidden">
+            <div v-for="(item, index) in routes" :key="index">
+              <el-submenu :index="index + ''" v-if="!item.hidden">
                 <template slot="title">
                   <span>{{ item.name }}</span>
                 </template>
@@ -38,6 +35,23 @@
           </el-menu>
         </el-aside>
         <el-main>
+          <el-breadcrumb
+            separator-class="el-icon-arrow-right"
+            v-if="this.$router.currentRoute.path != '/home'"
+          >
+            <el-breadcrumb-item :to="{ path: '/home' }"
+              >首页</el-breadcrumb-item
+            >
+            <el-breadcrumb-item>{{
+              this.$router.currentRoute.name
+            }}</el-breadcrumb-item>
+          </el-breadcrumb>
+          <div
+            v-if="this.$router.currentRoute.path == '/home'"
+            class="homeWelcome"
+          >
+            欢迎来到CRM客户管理系统
+          </div>
           <router-view />
         </el-main>
       </el-container>
@@ -53,8 +67,8 @@ export default {
       user: JSON.parse(window.sessionStorage.getItem("user"))
     };
   },
-  computed:{
-    routes(){
+  computed: {
+    routes() {
       return this.$store.state.routes;
     }
   },
@@ -70,7 +84,7 @@ export default {
             this.getRequest("/logout").then(() => {
               window.sessionStorage.removeItem("user");
               this.$router.replace("/");
-              this.$store.commit("initRoutes",[]);
+              this.$store.commit("initRoutes", []);
             });
           })
           .catch(() => {
@@ -115,5 +129,13 @@ export default {
 .el-dropdown-link {
   display: flex;
   align-items: center;
+}
+
+.homeWelcome {
+  text-align: center;
+  font-size: 30px;
+  font-family: 微软雅黑;
+  color: #409eff;
+  padding-top: 50px;
 }
 </style>
