@@ -22,6 +22,7 @@
           v-model="loginForm.password"
           auto-complete="off"
           placeholder="请输入密码"
+          @keydown.enter.native="doLogin"
         />
       </el-form-item>
       <el-button type="primary" style="width: 100%" @click="doLogin"

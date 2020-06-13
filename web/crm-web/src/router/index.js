@@ -20,13 +20,19 @@ const routes = [
   },
   {
     path: "/home",
-    name:"导航一",
+    name: "导航一",
     component: Home,
-    children: [{
-      path:'/test',
-      name:'TEST页面',
-      component: Test
-    }]
+    children: [
+      {
+        path: "/test",
+        name: "TEST页面",
+        component: Test
+      }
+    ]
+  },
+  {
+    path: "*",
+    redirect: "/home"
   }
 ];
 
