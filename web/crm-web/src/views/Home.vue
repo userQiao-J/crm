@@ -17,13 +17,13 @@
         </el-dropdown>
       </el-header>
       <el-container>
-        <el-aside>
-          <el-menu router>
+        <el-aside width="200px">
+          <el-menu router unique-opened>
             <div
-              v-for="(item, index) in this.$router.options.routes"
+              v-for="(item, index) in routes"
               :key="index"
             >
-              <el-submenu index="1" v-if="!item.hidden">
+              <el-submenu :index="index+''" v-if="!item.hidden">
                 <template slot="title">
                   <span>{{ item.name }}</span>
                 </template>
@@ -53,6 +53,11 @@ export default {
       user: JSON.parse(window.sessionStorage.getItem("user"))
     };
   },
+  computed:{
+    routes(){
+      return this.$store.state.routes;
+    }
+  },
   methods: {
     commandHandler(cmd) {
       if (cmd == "loginout") {
@@ -65,6 +70,7 @@ export default {
             this.getRequest("/logout").then(() => {
               window.sessionStorage.removeItem("user");
               this.$router.replace("/");
+              this.$store.commit("initRoutes",[]);
             });
           })
           .catch(() => {

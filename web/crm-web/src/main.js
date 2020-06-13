@@ -9,6 +9,7 @@ import { postKeyValueRequest } from "./utils/api";
 import { putRequest } from "./utils/api";
 import { getRequest } from "./utils/api";
 import { deleteRequest } from "./utils/api";
+import { initMenu } from "./utils/menus";
 
 Vue.config.productionTip = false;
 Vue.prototype.postRequest = postRequest;
@@ -19,6 +20,15 @@ Vue.prototype.deleteRequest = deleteRequest;
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
+
+router.beforeEach((to, from, next) => {
+  if (to.path == "/") {
+    next();
+  } else {
+    initMenu(router, store);
+    next();
+  }
+});
 new Vue({
   router,
   store,
