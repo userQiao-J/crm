@@ -60,4 +60,10 @@ public interface MenuMapper {
      * @return
      */
     List<Menu> getMenusByUserId(@Param("userId") Integer userId);
+
+    /**
+     * 获取所有的菜单角色
+     * @return
+     */
+    List<Menu> getMenusWithRole();
 }

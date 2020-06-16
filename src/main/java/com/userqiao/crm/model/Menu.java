@@ -31,4 +31,6 @@ public class Menu {
     private Integer parentId;
 
     private Boolean enabled;
+
+    private List<Role> roles;
 }

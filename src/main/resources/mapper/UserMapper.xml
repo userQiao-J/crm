@@ -28,6 +28,11 @@
     from user
     where username = #{username,jdbcType=VARCHAR}
   </select>
+
+  <select id="getUserRolesById" resultType="com.userqiao.crm.model.Role">
+    select r.* from role r,user_role urr
+    where urr.rid = r.id and urr.userid=#{id,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
     where id = #{id,jdbcType=INTEGER}

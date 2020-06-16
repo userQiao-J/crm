@@ -1,7 +1,10 @@
 package com.userqiao.crm.mapper;
 
+import com.userqiao.crm.model.Role;
 import com.userqiao.crm.model.User;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 用户 Mapper
@@ -53,4 +56,11 @@ public interface UserMapper {
      * @return
      */
     User loadUserByUsername(@Param("username") String username);
+
+    /**
+     * 根据用户ID获取到角色
+     * @param id
+     * @return
+     */
+    List<Role> getUserRolesById(Integer id);
 }

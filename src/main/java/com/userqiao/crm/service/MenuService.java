@@ -12,4 +12,10 @@ import java.util.List;
  */
 public interface MenuService {
     List<Menu> getMenusByUserId();
+
+    /**
+     * 根据角色获取菜单列表
+     * @return
+     */
+    List<Menu> getMenusWithRole();
 }
