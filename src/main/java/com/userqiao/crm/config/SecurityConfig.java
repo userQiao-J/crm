@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -30,6 +31,7 @@ import java.io.PrintWriter;
 
 /**
  * Security配置类
+ *
  * @author userqiao
  * @date 2020/06/05
  */
@@ -41,10 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CustomerFilterInvocationSecurityMetadataSource customerFilterInvocationSecurityMetadataSource;
     @Autowired
     CustomUrlDecisionManager customUrlDecisionManager;
+
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService);
@@ -96,11 +100,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         resp.setContentType("application/json;charset=utf-8");
                         PrintWriter out = resp.getWriter();
                         RespBean errorBean = RespBean.error("登录失败！");
-                        if(e instanceof LockedException){
+                        if (e instanceof LockedException) {
                             errorBean.setMsg("账户被锁定，请联系管理员");
-                        }else if (e instanceof CredentialsExpiredException){
+                        } else if (e instanceof CredentialsExpiredException) {
                             errorBean.setMsg("密码过期，请联系管理员");
-                        }else if (e instanceof AccountExpiredException) {
+                        } else if (e instanceof AccountExpiredException) {
                             errorBean.setMsg("账户过期，请联系管理员!");
                         } else if (e instanceof DisabledException) {
                             errorBean.setMsg("账户被禁用，请联系管理员!");
@@ -128,6 +132,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf()
-                .disable();
+                .disable()
+                //没有认证，在这里处理结果，不要重定向
+                .exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
+            @Override
+            public void commence(HttpServletRequest req, HttpServletResponse resp, AuthenticationException e) throws IOException, ServletException {
+                resp.setContentType("application/json;charset=utf-8");
+                PrintWriter out = resp.getWriter();
+                RespBean errorBean = RespBean.error("访问失败！");
+                if (e instanceof InsufficientAuthenticationException) {
+                    errorBean.setMsg("请求失败，请联系管理员");
+                }
+                out.write(new ObjectMapper().writeValueAsString(errorBean));
+                out.flush();
+                out.close();
+            }
+        });
     }
 }

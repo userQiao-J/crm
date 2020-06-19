@@ -71,12 +71,12 @@ export default {
         if (valid) {
           this.postKeyValueRequest("/doLogin", this.loginForm).then(resp => {
             if (resp) {
-              console.log(resp);
               window.sessionStorage.setItem(
                 "user",
                 JSON.stringify(resp.object)
               );
-              this.$router.replace("/home");
+              let path = this.$route.query.redirect;
+              this.$router.replace((path == '/' || path == undefined) ? '/home' : path);
             }
           });
         } else {
