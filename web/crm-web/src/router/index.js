@@ -14,13 +14,10 @@ const routes = [
   },
   {
     path: "/home",
-    name: "导航一",
+    name: "Home",
     component: Home,
+    hidden: true,
     children: []
-  },
-  {
-    path: "*",
-    redirect: "/home"
   }
 ];
 
