@@ -1,6 +1,9 @@
 package com.userqiao.crm.mapper;
 
 import com.userqiao.crm.model.Role;
+
+import java.util.List;
+
 /**
  * 角色 Mapper
  *
@@ -44,4 +47,9 @@ public interface RoleMapper {
      * @return
      */
     int updateByPrimaryKey(Role record);
+    /**
+     * 查询出所有的角色信息
+     * @return
+     */
+    List<Role> getAllRole();
 }
