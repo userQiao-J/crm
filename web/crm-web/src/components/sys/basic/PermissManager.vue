@@ -18,7 +18,7 @@
       >
     </div>
     <div style="margin-top: 10px;width: 700px">
-      <el-collapse accordion>
+      <el-collapse accordion @change="change">
         <el-collapse-item
           :title="r.nameZh"
           :name="r.id"
@@ -34,7 +34,9 @@
                 type="text"
               ></el-button>
             </div>
-            <div></div>
+            <div>
+              <el-tree show-checkbox :data="allmenus" :props="defaultProps"></el-tree>
+            </div>
           </el-card>
         </el-collapse-item>
       </el-collapse>
@@ -51,7 +53,12 @@ export default {
         name: "",
         nameZh: ""
       },
-      roles: []
+      roles: [],
+      allmenus: [],
+      defaultProps: {
+        children: "children",
+        label: "name"
+      }
     };
   },
   mounted() {
@@ -63,6 +70,19 @@ export default {
         if (resp.object) {
           console.log(resp.object);
           this.roles = resp.object;
+        }
+      });
+    },
+    change(name) {
+      if (name) {
+        this.initAllMenus();
+      }
+    },
+    initAllMenus() {
+      this.getRequest("/system/basic/permiss/menus").then(resp => {
+        if (resp.object) {
+          console.log(resp.object);
+          this.allmenus = resp.object;
         }
       });
     }

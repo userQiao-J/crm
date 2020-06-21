@@ -33,4 +33,9 @@ public class MenuServiceImpl implements MenuService {
         // 建议 查询出来后保存到Redis当中去，不要每次都去查询数据库。严重影响效率
         return menuMapper.getMenusWithRole();
     }
+
+    @Override
+    public List<Menu> getAllMenus() {
+        return menuMapper.getAllMenus();
+    }
 }

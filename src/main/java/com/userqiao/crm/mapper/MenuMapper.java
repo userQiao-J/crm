@@ -66,4 +66,6 @@ public interface MenuMapper {
      * @return
      */
     List<Menu> getMenusWithRole();
+
+    List<Menu> getAllMenus();
 }

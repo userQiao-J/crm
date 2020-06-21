@@ -18,4 +18,9 @@ public interface MenuService {
      * @return
      */
     List<Menu> getMenusWithRole();
+
+    /**
+     * 获取所有菜单
+     */
+    List<Menu> getAllMenus();
 }
