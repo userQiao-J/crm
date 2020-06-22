@@ -352,3 +352,44 @@ values (57, 14, 0, 3, 1),
        (79, 18, 0, 10, 0),
        (80, 18, 0, 11, 0),
        (81, 18, 0, 12, 0);
+
+DROP TABLE IF EXISTS `oper_log`;
+create table oper_log
+(
+	oper_id_ varchar(64) auto_increment,
+	oper_modul_ varchar(64) null comment '功能模块',
+	oper_type_ varchar(64) null comment '操作类型',
+	oper_desc_ varchar(500) null comment '操作描述',
+	oper_requ_param_ text null comment '请求参数',
+	oper_resp_param_ text null comment '返回参数',
+	oper_user_id_ int null comment '操作员ID',
+	oper_user_name varchar(64) null comment '操作员名称',
+	oper_method_ varchar(255) null comment '操作方法',
+	oper_url_ varchar(255) null comment '请求URL',
+	oper_ip_ varchar(64) null comment '请求客户端IP',
+	oper_create_time_ datetime null comment '操作时间',
+	oper_ver_ varchar(64) null comment '操作版本号',
+	constraint oper_log_pk
+		primary key (oper_id_)
+)
+comment '操作记录';
+
+DROP TABLE IF EXISTS `exc_log`;
+create table exc_log
+(
+	exc_id_ int auto_increment,
+	exc_requ_param text null comment '请求参数',
+	exc_name varchar(255) null comment '异常名称',
+	exc_message_ text null comment '异常信息',
+	oper_user_id int null comment '用户ID',
+	oper_user_name_ varchar(64) null comment '用户名称',
+	oper_method_ varchar(255) null comment '操作方法',
+	oper_url varchar(255) null comment '请求URL',
+	oper_ip_ varchar(64) null comment '请求客户端IP',
+	oper_ver_ varchar(64) null comment '操作版本号',
+	oper_create_time datetime null comment '创建时间',
+	constraint exc_log_pk
+		primary key (exc_id_)
+)
+comment '异常日志记录表';
+

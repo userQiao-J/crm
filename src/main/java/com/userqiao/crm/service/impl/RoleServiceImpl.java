@@ -21,6 +21,7 @@ public class RoleServiceImpl implements RoleService {
     RoleMapper roleMapper;
     @Override
     public List<Role> getAllRole() {
+        //@TODO 后期将其保存到Redis缓存里,不要每次都查询数据库
         return roleMapper.getAllRole();
     }
 }

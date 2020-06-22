@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.userqiao.crm.mapper.OperLogModelMapper" >
+  <resultMap id="BaseResultMap" type="com.userqiao.crm.model.OperLogModel" >
+    <id column="oper_id_" property="operId" jdbcType="VARCHAR" />
+    <result column="oper_modul_" property="operModul" jdbcType="VARCHAR" />
+    <result column="oper_type_" property="operType" jdbcType="VARCHAR" />
+    <result column="oper_desc_" property="operDesc" jdbcType="VARCHAR" />
+    <result column="oper_user_id_" property="operUserId" jdbcType="INTEGER" />
+    <result column="oper_user_name" property="operUserName" jdbcType="VARCHAR" />
+    <result column="oper_method_" property="operMethod" jdbcType="VARCHAR" />
+    <result column="oper_url_" property="operUrl" jdbcType="VARCHAR" />
+    <result column="oper_ip_" property="operIp" jdbcType="VARCHAR" />
+    <result column="oper_create_time_" property="operCreateTime" jdbcType="TIMESTAMP" />
+    <result column="oper_ver_" property="operVer" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.userqiao.crm.model.OperLogModel" extends="BaseResultMap" >
+    <result column="oper_requ_param_" property="operRequParam" jdbcType="LONGVARCHAR" />
+    <result column="oper_resp_param_" property="operRespParam" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    oper_id_, oper_modul_, oper_type_, oper_desc_, oper_user_id_, oper_user_name, oper_method_, 
+    oper_url_, oper_ip_, oper_create_time_, oper_ver_
+  </sql>
+  <sql id="Blob_Column_List" >
+    oper_requ_param_, oper_resp_param_
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from oper_log
+    where oper_id_ = #{operId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from oper_log
+    where oper_id_ = #{operId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.userqiao.crm.model.OperLogModel" >
+    insert into oper_log (oper_id_, oper_modul_, oper_type_, 
+      oper_desc_, oper_user_id_, oper_user_name, 
+      oper_method_, oper_url_, oper_ip_, 
+      oper_create_time_, oper_ver_, oper_requ_param_, 
+      oper_resp_param_)
+    values (#{operId,jdbcType=VARCHAR}, #{operModul,jdbcType=VARCHAR}, #{operType,jdbcType=VARCHAR},
+      #{operDesc,jdbcType=VARCHAR}, #{operUserId,jdbcType=INTEGER}, #{operUserName,jdbcType=VARCHAR}, 
+      #{operMethod,jdbcType=VARCHAR}, #{operUrl,jdbcType=VARCHAR}, #{operIp,jdbcType=VARCHAR}, 
+      #{operCreateTime,jdbcType=TIMESTAMP}, #{operVer,jdbcType=VARCHAR}, #{operRequParam,jdbcType=LONGVARCHAR},
+      #{operRespParam,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.userqiao.crm.model.OperLogModel" >
+    insert into oper_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operId != null" >
+        oper_id_,
+      </if>
+      <if test="operModul != null" >
+        oper_modul_,
+      </if>
+      <if test="operType != null" >
+        oper_type_,
+      </if>
+      <if test="operDesc != null" >
+        oper_desc_,
+      </if>
+      <if test="operUserId != null" >
+        oper_user_id_,
+      </if>
+      <if test="operUserName != null" >
+        oper_user_name,
+      </if>
+      <if test="operMethod != null" >
+        oper_method_,
+      </if>
+      <if test="operUrl != null" >
+        oper_url_,
+      </if>
+      <if test="operIp != null" >
+        oper_ip_,
+      </if>
+      <if test="operCreateTime != null" >
+        oper_create_time_,
+      </if>
+      <if test="operVer != null" >
+        oper_ver_,
+      </if>
+      <if test="operRequParam != null" >
+        oper_requ_param_,
+      </if>
+      <if test="operRespParam != null" >
+        oper_resp_param_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operId != null" >
+        #{operId,jdbcType=VARCHAR},
+      </if>
+      <if test="operModul != null" >
+        #{operModul,jdbcType=VARCHAR},
+      </if>
+      <if test="operType != null" >
+        #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="operDesc != null" >
+        #{operDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="operUserId != null" >
+        #{operUserId,jdbcType=INTEGER},
+      </if>
+      <if test="operUserName != null" >
+        #{operUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="operMethod != null" >
+        #{operMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="operUrl != null" >
+        #{operUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="operIp != null" >
+        #{operIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operCreateTime != null" >
+        #{operCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operVer != null" >
+        #{operVer,jdbcType=VARCHAR},
+      </if>
+      <if test="operRequParam != null" >
+        #{operRequParam,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="operRespParam != null" >
+        #{operRespParam,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.userqiao.crm.model.OperLogModel" >
+    update oper_log
+    <set >
+      <if test="operModul != null" >
+        oper_modul_ = #{operModul,jdbcType=VARCHAR},
+      </if>
+      <if test="operType != null" >
+        oper_type_ = #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="operDesc != null" >
+        oper_desc_ = #{operDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="operUserId != null" >
+        oper_user_id_ = #{operUserId,jdbcType=INTEGER},
+      </if>
+      <if test="operUserName != null" >
+        oper_user_name = #{operUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="operMethod != null" >
+        oper_method_ = #{operMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="operUrl != null" >
+        oper_url_ = #{operUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="operIp != null" >
+        oper_ip_ = #{operIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operCreateTime != null" >
+        oper_create_time_ = #{operCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operVer != null" >
+        oper_ver_ = #{operVer,jdbcType=VARCHAR},
+      </if>
+      <if test="operRequParam != null" >
+        oper_requ_param_ = #{operRequParam,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="operRespParam != null" >
+        oper_resp_param_ = #{operRespParam,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where oper_id_ = #{operId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.userqiao.crm.model.OperLogModel" >
+    update oper_log
+    set oper_modul_ = #{operModul,jdbcType=VARCHAR},
+      oper_type_ = #{operType,jdbcType=VARCHAR},
+      oper_desc_ = #{operDesc,jdbcType=VARCHAR},
+      oper_user_id_ = #{operUserId,jdbcType=INTEGER},
+      oper_user_name = #{operUserName,jdbcType=VARCHAR},
+      oper_method_ = #{operMethod,jdbcType=VARCHAR},
+      oper_url_ = #{operUrl,jdbcType=VARCHAR},
+      oper_ip_ = #{operIp,jdbcType=VARCHAR},
+      oper_create_time_ = #{operCreateTime,jdbcType=TIMESTAMP},
+      oper_ver_ = #{operVer,jdbcType=VARCHAR},
+      oper_requ_param_ = #{operRequParam,jdbcType=LONGVARCHAR},
+      oper_resp_param_ = #{operRespParam,jdbcType=LONGVARCHAR}
+    where oper_id_ = #{operId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.userqiao.crm.model.OperLogModel" >
+    update oper_log
+    set oper_modul_ = #{operModul,jdbcType=VARCHAR},
+      oper_type_ = #{operType,jdbcType=VARCHAR},
+      oper_desc_ = #{operDesc,jdbcType=VARCHAR},
+      oper_user_id_ = #{operUserId,jdbcType=INTEGER},
+      oper_user_name = #{operUserName,jdbcType=VARCHAR},
+      oper_method_ = #{operMethod,jdbcType=VARCHAR},
+      oper_url_ = #{operUrl,jdbcType=VARCHAR},
+      oper_ip_ = #{operIp,jdbcType=VARCHAR},
+      oper_create_time_ = #{operCreateTime,jdbcType=TIMESTAMP},
+      oper_ver_ = #{operVer,jdbcType=VARCHAR}
+    where oper_id_ = #{operId,jdbcType=VARCHAR}
+  </update>
+</mapper>

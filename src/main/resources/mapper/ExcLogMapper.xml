@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.userqiao.crm.mapper.ExcLogMapper" >
+  <resultMap id="BaseResultMap" type="com.userqiao.crm.model.ExcLog" >
+    <id column="exc_id_" property="excId" jdbcType="INTEGER" />
+    <result column="exc_name" property="excName" jdbcType="VARCHAR" />
+    <result column="oper_user_id" property="operUserId" jdbcType="INTEGER" />
+    <result column="oper_user_name_" property="operUserName" jdbcType="VARCHAR" />
+    <result column="oper_method_" property="operMethod" jdbcType="VARCHAR" />
+    <result column="oper_url" property="operUrl" jdbcType="VARCHAR" />
+    <result column="oper_ip_" property="operIp" jdbcType="VARCHAR" />
+    <result column="oper_ver_" property="operVer" jdbcType="VARCHAR" />
+    <result column="oper_create_time" property="operCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.userqiao.crm.model.ExcLog" extends="BaseResultMap" >
+    <result column="exc_requ_param" property="excRequParam" jdbcType="LONGVARCHAR" />
+    <result column="exc_message_" property="excMessage" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    exc_id_, exc_name, oper_user_id, oper_user_name_, oper_method_, oper_url, oper_ip_, 
+    oper_ver_, oper_create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    exc_requ_param, exc_message_
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from exc_log
+    where exc_id_ = #{excId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from exc_log
+    where exc_id_ = #{excId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.userqiao.crm.model.ExcLog" >
+    insert into exc_log (exc_id_, exc_name, oper_user_id, 
+      oper_user_name_, oper_method_, oper_url, 
+      oper_ip_, oper_ver_, oper_create_time, 
+      exc_requ_param, exc_message_)
+    values (#{excId,jdbcType=INTEGER}, #{excName,jdbcType=VARCHAR}, #{operUserId,jdbcType=INTEGER}, 
+      #{operUserName,jdbcType=VARCHAR}, #{operMethod,jdbcType=VARCHAR}, #{operUrl,jdbcType=VARCHAR}, 
+      #{operIp,jdbcType=VARCHAR}, #{operVer,jdbcType=VARCHAR}, #{operCreateTime,jdbcType=TIMESTAMP}, 
+      #{excRequParam,jdbcType=LONGVARCHAR}, #{excMessage,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.userqiao.crm.model.ExcLog" >
+    insert into exc_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="excId != null" >
+        exc_id_,
+      </if>
+      <if test="excName != null" >
+        exc_name,
+      </if>
+      <if test="operUserId != null" >
+        oper_user_id,
+      </if>
+      <if test="operUserName != null" >
+        oper_user_name_,
+      </if>
+      <if test="operMethod != null" >
+        oper_method_,
+      </if>
+      <if test="operUrl != null" >
+        oper_url,
+      </if>
+      <if test="operIp != null" >
+        oper_ip_,
+      </if>
+      <if test="operVer != null" >
+        oper_ver_,
+      </if>
+      <if test="operCreateTime != null" >
+        oper_create_time,
+      </if>
+      <if test="excRequParam != null" >
+        exc_requ_param,
+      </if>
+      <if test="excMessage != null" >
+        exc_message_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="excId != null" >
+        #{excId,jdbcType=INTEGER},
+      </if>
+      <if test="excName != null" >
+        #{excName,jdbcType=VARCHAR},
+      </if>
+      <if test="operUserId != null" >
+        #{operUserId,jdbcType=INTEGER},
+      </if>
+      <if test="operUserName != null" >
+        #{operUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="operMethod != null" >
+        #{operMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="operUrl != null" >
+        #{operUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="operIp != null" >
+        #{operIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operVer != null" >
+        #{operVer,jdbcType=VARCHAR},
+      </if>
+      <if test="operCreateTime != null" >
+        #{operCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="excRequParam != null" >
+        #{excRequParam,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="excMessage != null" >
+        #{excMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.userqiao.crm.model.ExcLog" >
+    update exc_log
+    <set >
+      <if test="excName != null" >
+        exc_name = #{excName,jdbcType=VARCHAR},
+      </if>
+      <if test="operUserId != null" >
+        oper_user_id = #{operUserId,jdbcType=INTEGER},
+      </if>
+      <if test="operUserName != null" >
+        oper_user_name_ = #{operUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="operMethod != null" >
+        oper_method_ = #{operMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="operUrl != null" >
+        oper_url = #{operUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="operIp != null" >
+        oper_ip_ = #{operIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operVer != null" >
+        oper_ver_ = #{operVer,jdbcType=VARCHAR},
+      </if>
+      <if test="operCreateTime != null" >
+        oper_create_time = #{operCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="excRequParam != null" >
+        exc_requ_param = #{excRequParam,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="excMessage != null" >
+        exc_message_ = #{excMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where exc_id_ = #{excId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.userqiao.crm.model.ExcLog" >
+    update exc_log
+    set exc_name = #{excName,jdbcType=VARCHAR},
+      oper_user_id = #{operUserId,jdbcType=INTEGER},
+      oper_user_name_ = #{operUserName,jdbcType=VARCHAR},
+      oper_method_ = #{operMethod,jdbcType=VARCHAR},
+      oper_url = #{operUrl,jdbcType=VARCHAR},
+      oper_ip_ = #{operIp,jdbcType=VARCHAR},
+      oper_ver_ = #{operVer,jdbcType=VARCHAR},
+      oper_create_time = #{operCreateTime,jdbcType=TIMESTAMP},
+      exc_requ_param = #{excRequParam,jdbcType=LONGVARCHAR},
+      exc_message_ = #{excMessage,jdbcType=LONGVARCHAR}
+    where exc_id_ = #{excId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.userqiao.crm.model.ExcLog" >
+    update exc_log
+    set exc_name = #{excName,jdbcType=VARCHAR},
+      oper_user_id = #{operUserId,jdbcType=INTEGER},
+      oper_user_name_ = #{operUserName,jdbcType=VARCHAR},
+      oper_method_ = #{operMethod,jdbcType=VARCHAR},
+      oper_url = #{operUrl,jdbcType=VARCHAR},
+      oper_ip_ = #{operIp,jdbcType=VARCHAR},
+      oper_ver_ = #{operVer,jdbcType=VARCHAR},
+      oper_create_time = #{operCreateTime,jdbcType=TIMESTAMP}
+    where exc_id_ = #{excId,jdbcType=INTEGER}
+  </update>
+</mapper>

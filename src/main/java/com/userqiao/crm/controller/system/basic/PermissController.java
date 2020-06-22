@@ -1,5 +1,7 @@
 package com.userqiao.crm.controller.system.basic;
 
+import com.userqiao.crm.aop.OperLog;
+import com.userqiao.crm.controller.BaseController;
 import com.userqiao.crm.model.Menu;
 import com.userqiao.crm.model.RespBean;
 import com.userqiao.crm.model.Role;
@@ -21,19 +23,21 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/system/basic/permiss")
-public class PermissController {
+public class PermissController extends BaseController {
 
     @Autowired
     RoleService roleService;
     @Autowired
     MenuService menuService;
     @GetMapping("/getAllRoles")
+    @OperLog(operModul = "基础配置-权限组",operType = LOGCONST_GET,operDesc = "查询出所有的角色")
     public RespBean getAllRoles(){
         List<Role> role = roleService.getAllRole();
         return RespBean.ok("查询成功",role);
     }
 
     @GetMapping("/menus")
+    @OperLog(operModul = "基础配置-菜单列表",operType = LOGCONST_GET,operDesc = "查询出菜单列表")
     public RespBean getAllMenus(){
         List<Menu> allMenus = menuService.getAllMenus();
         return RespBean.ok("查询成功",allMenus);
