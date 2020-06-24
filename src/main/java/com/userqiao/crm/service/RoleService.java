@@ -1,5 +1,6 @@
 package com.userqiao.crm.service;
 
+import com.userqiao.crm.model.RespBean;
 import com.userqiao.crm.model.Role;
 
 import java.util.List;
@@ -18,4 +19,9 @@ public interface RoleService {
      */
     List<Role> getAllRole();
 
+    /**
+     * 根据用户ID删除对应的角色信息
+     * @param roleId
+     */
+    RespBean deleteRole(String roleId);
 }

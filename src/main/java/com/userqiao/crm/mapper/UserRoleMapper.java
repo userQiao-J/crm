@@ -44,4 +44,6 @@ public interface UserRoleMapper {
      * @return
      */
     int updateByPrimaryKey(UserRole record);
+
+    int getCountByRoleId(Integer roleId);
 }

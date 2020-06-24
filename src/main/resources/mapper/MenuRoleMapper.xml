@@ -19,6 +19,10 @@
     delete from menu_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByRoleId" parameterType="java.lang.Integer" >
+    delete from menu_role
+    where rid = #{roleId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.userqiao.crm.model.MenuRole" >
     insert into menu_role (id, mid, rid)
     values (#{id,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER})

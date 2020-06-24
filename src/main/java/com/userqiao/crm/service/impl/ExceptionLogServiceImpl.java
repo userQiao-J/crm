@@ -1,5 +1,6 @@
 package com.userqiao.crm.service.impl;
 
+import com.userqiao.crm.mapper.ExcLogMapper;
 import com.userqiao.crm.model.ExcLog;
 import com.userqiao.crm.service.ExceptionLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExceptionLogServiceImpl implements ExceptionLogService {
     @Autowired
-    ExceptionLogService exceptionLogService;
+    ExcLogMapper excLogMapper;
     @Override
     public void insert(ExcLog excepLog) {
-        exceptionLogService.insert(excepLog);
+        excLogMapper.insert(excepLog);
     }
 }

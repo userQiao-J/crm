@@ -44,4 +44,6 @@ public interface MenuRoleMapper {
      * @return
      */
     int updateByPrimaryKey(MenuRole record);
+
+    int deleteByRoleId(Integer roleId);
 }

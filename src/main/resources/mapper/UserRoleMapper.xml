@@ -15,6 +15,11 @@
     from user_role
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getCountByRoleId" resultType="int" >
+    select count(0)
+    from user_role
+    where rid=#{roleId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_role
     where id = #{id,jdbcType=INTEGER}

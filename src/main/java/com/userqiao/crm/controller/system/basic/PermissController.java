@@ -8,9 +8,7 @@ import com.userqiao.crm.model.Role;
 import com.userqiao.crm.service.MenuService;
 import com.userqiao.crm.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,5 +39,11 @@ public class PermissController extends BaseController {
     public RespBean getAllMenus(){
         List<Menu> allMenus = menuService.getAllMenus();
         return RespBean.ok("查询成功",allMenus);
+    }
+
+    @DeleteMapping("/deleteRole/{roleId}")
+    @OperLog(operModul = "基础配置-权限组",operType = LOGCONST_DELETE,operDesc = "删除角色")
+    public RespBean deleteRoleById(@PathVariable("roleId") String roleId){
+        return roleService.deleteRole(roleId);
     }
 }
