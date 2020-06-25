@@ -33,6 +33,12 @@
     from oper_log
     where oper_id_ = #{operId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    from oper_log
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from oper_log
     where oper_id_ = #{operId,jdbcType=INTEGER}

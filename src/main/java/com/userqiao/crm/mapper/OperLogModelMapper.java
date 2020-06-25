@@ -2,6 +2,8 @@ package com.userqiao.crm.mapper;
 
 import com.userqiao.crm.model.OperLogModel;
 
+import java.util.List;
+
 public interface OperLogModelMapper {
     int deleteByPrimaryKey(Integer operId);
 
@@ -10,6 +12,8 @@ public interface OperLogModelMapper {
     int insertSelective(OperLogModel record);
 
     OperLogModel selectByPrimaryKey(Integer operId);
+
+    List<OperLogModel> selectAll();
 
     int updateByPrimaryKeySelective(OperLogModel record);
 
