@@ -2,13 +2,16 @@ package com.userqiao.crm.service.impl;
 
 import com.userqiao.crm.mapper.MenuMapper;
 import com.userqiao.crm.model.Menu;
+import com.userqiao.crm.model.RespBean;
 import com.userqiao.crm.model.User;
 import com.userqiao.crm.service.MenuService;
+import com.userqiao.crm.service.RoleMenuService;
 import com.userqiao.crm.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +26,8 @@ import java.util.List;
 public class MenuServiceImpl implements MenuService {
     @Autowired
     MenuMapper menuMapper;
+    @Autowired
+    RoleMenuService roleMenuService;
     @Override
     public List<Menu> getMenusByUserId() {
         return menuMapper.getMenusByUserId(UserUtils.getUser().getId());
@@ -37,5 +42,20 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<Menu> getAllMenus() {
         return menuMapper.getAllMenus();
+    }
+
+    @Override
+    public RespBean getMidsByRid(Integer rid) {
+        List<Integer> mids = menuMapper.getMidsByRid(rid);
+        return RespBean.ok("查询成功",mids);
+    }
+
+    @Override
+    @Transactional
+    public boolean updateMenuRole(Integer rid, Integer[] mids) {
+        roleMenuService.deleteRoleMenuByRoleId(Integer.toString(rid));
+        Integer result = roleMenuService.insertRecorId(rid, mids);
+        // 如果添加响应的行数为数组的大小 就证明添加成功
+        return result == mids.length;
     }
 }

@@ -13,4 +13,9 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     public void deleteRoleMenuByRoleId(String roleId) {
         menuRoleMapper.deleteByRoleId(Integer.parseInt(roleId));
     }
+
+    @Override
+    public Integer insertRecorId(Integer rid, Integer[] mids) {
+        return menuRoleMapper.insertRecorId(rid,mids);
+    }
 }

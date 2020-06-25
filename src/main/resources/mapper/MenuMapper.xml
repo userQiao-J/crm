@@ -81,6 +81,9 @@
           and m3.enabled = true
         order by m1.id,m2.id,m3.id
     </select>
+    <select id="getMidsByRid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select mid from  menu_role where rid = #{rid,jdbcType=INTEGER}
+    </select>
     <select id="getMenusByUserId" parameterType="java.lang.Integer" resultMap="Menus2">
         select  distinct m1.*,
                         m2.`id`          as id2,

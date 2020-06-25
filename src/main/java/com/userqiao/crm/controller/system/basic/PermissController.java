@@ -27,23 +27,39 @@ public class PermissController extends BaseController {
     RoleService roleService;
     @Autowired
     MenuService menuService;
+
     @GetMapping("/getAllRoles")
-    @OperLog(operModul = "基础配置-权限组",operType = LOGCONST_GET,operDesc = "查询出所有的角色")
-    public RespBean getAllRoles(){
+    @OperLog(operModul = "基础配置-权限组", operType = LOGCONST_GET, operDesc = "查询出所有的角色")
+    public RespBean getAllRoles() {
         List<Role> role = roleService.getAllRole();
-        return RespBean.ok("查询成功",role);
+        return RespBean.ok("查询成功", role);
     }
 
     @GetMapping("/menus")
-    @OperLog(operModul = "基础配置-菜单列表",operType = LOGCONST_GET,operDesc = "查询出菜单列表")
-    public RespBean getAllMenus(){
+    @OperLog(operModul = "基础配置-菜单列表", operType = LOGCONST_GET, operDesc = "查询出菜单列表")
+    public RespBean getAllMenus() {
         List<Menu> allMenus = menuService.getAllMenus();
-        return RespBean.ok("查询成功",allMenus);
+        return RespBean.ok("查询成功", allMenus);
     }
 
     @DeleteMapping("/deleteRole/{roleId}")
-    @OperLog(operModul = "基础配置-权限组",operType = LOGCONST_DELETE,operDesc = "删除角色")
-    public RespBean deleteRoleById(@PathVariable("roleId") String roleId){
+    @OperLog(operModul = "基础配置-权限组", operType = LOGCONST_DELETE, operDesc = "删除角色")
+    public RespBean deleteRoleById(@PathVariable("roleId") String roleId) {
         return roleService.deleteRole(roleId);
+    }
+
+    @GetMapping("/getMidsByRid/{rid}")
+    @OperLog(operModul = "基础配置-权限组", operType = LOGCONST_GET, operDesc = "查询出角色对应得菜单列表")
+    public RespBean getMidsByRid(@PathVariable("rid") Integer rid) {
+        return menuService.getMidsByRid(rid);
+    }
+
+    @PutMapping("/")
+    @OperLog(operModul = "基础配置-权限组", operType = LOGCONST_UPDATE,operDesc = "更新菜单角色之间的关联关系")
+    public RespBean updateMenuRole(Integer rid, Integer[] mids) {
+        if (menuService.updateMenuRole(rid,mids)){
+            return RespBean.ok("更新成功");
+        }
+        return RespBean.error("更新失败");
     }
 }

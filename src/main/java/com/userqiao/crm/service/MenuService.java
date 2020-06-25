@@ -1,6 +1,7 @@
 package com.userqiao.crm.service;
 
 import com.userqiao.crm.model.Menu;
+import com.userqiao.crm.model.RespBean;
 
 import java.util.List;
 
@@ -23,4 +24,13 @@ public interface MenuService {
      * 获取所有菜单
      */
     List<Menu> getAllMenus();
+
+    /**
+     * 根据角色ID获取到与菜单之间的关联关系
+     * @param rid
+     * @return
+     */
+    RespBean getMidsByRid(Integer rid);
+
+    boolean updateMenuRole(Integer rid, Integer[] mids);
 }

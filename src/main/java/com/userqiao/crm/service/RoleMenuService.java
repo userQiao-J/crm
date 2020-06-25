@@ -13,4 +13,6 @@ public interface RoleMenuService {
      * @param roleId
      */
     void deleteRoleMenuByRoleId(String roleId);
+
+    Integer insertRecorId(Integer rid, Integer[] mids);
 }

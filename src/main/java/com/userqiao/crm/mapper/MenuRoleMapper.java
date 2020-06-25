@@ -1,6 +1,8 @@
 package com.userqiao.crm.mapper;
 
 import com.userqiao.crm.model.MenuRole;
+import org.apache.ibatis.annotations.Param;
+
 /**
  * 菜单角色 Mapper
  *
@@ -46,4 +48,6 @@ public interface MenuRoleMapper {
     int updateByPrimaryKey(MenuRole record);
 
     int deleteByRoleId(Integer roleId);
+
+    Integer insertRecorId(@Param("rid") Integer rid, @Param("mids") Integer[] mids);
 }

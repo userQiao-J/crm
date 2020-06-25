@@ -18,7 +18,7 @@
       >
     </div>
     <div style="margin-top: 10px;width: 700px">
-      <el-collapse accordion @change="change">
+      <el-collapse v-model="activeName" accordion @change="change">
         <el-collapse-item
           :title="r.nameZh"
           :name="r.id"
@@ -35,7 +35,24 @@
               ></el-button>
             </div>
             <div>
-              <el-tree show-checkbox :data="allmenus" :props="defaultProps"></el-tree>
+              <el-tree
+                show-checkbox
+                node-key="id"
+                ref="tree"
+                :default-checked-keys="selectedMenus"
+                :data="allmenus"
+                :props="defaultProps"
+              >
+              </el-tree>
+              <div style="display: flex;justify-content: flex-end">
+                <el-button size="mini" @click="exitUpdate">取消修改</el-button>
+                <el-button
+                  size="mini"
+                  type="primary"
+                  @click="doUpdate(r.id, index)"
+                  >确认修改</el-button
+                >
+              </div>
             </div>
           </el-card>
         </el-collapse-item>
@@ -55,10 +72,12 @@ export default {
       },
       roles: [],
       allmenus: [],
+      selectedMenus: [], //选中的菜单项
       defaultProps: {
         children: "children",
         label: "name"
-      }
+      },
+      activeName: -1
     };
   },
   mounted() {
@@ -73,9 +92,21 @@ export default {
         }
       });
     },
-    change(name) {
-      if (name) {
+    // 根据角色ID获取选中项的菜单列表ID
+    initSelectMenus(rid) {
+      this.getRequest(`/system/basic/permiss/getMidsByRid/` + rid).then(
+        resp => {
+          console.log(resp);
+          if (resp.object) {
+            this.selectedMenus = resp.object;
+          }
+        }
+      );
+    },
+    change(rid) {
+      if (rid) {
         this.initAllMenus();
+        this.initSelectMenus(rid);
       }
     },
     initAllMenus() {
@@ -85,6 +116,22 @@ export default {
           this.allmenus = resp.object;
         }
       });
+    },
+    doUpdate(rid, index) {
+      // 修改角色与菜单的关联关系
+      let tree = this.$refs.tree[index];
+      let selectKeys = tree.getCheckedKeys(true);
+      let url = "/system/basic/permiss/?rid=" + rid + "&mids=" + selectKeys;
+      this.putRequest(url).then(resp => {
+        if (resp) {
+          this.$message.success(resp.msg);
+          this.initRoles();
+          this.activeName = -1;
+        }
+      });
+    },
+    exitUpdate() {
+      this.activeName = -1;
     }
   }
 };
