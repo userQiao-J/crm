@@ -1,4 +1,4 @@
-package com.userqiao.crm.mapper;
+package com.userqiao.crm.model;
 
 import java.util.List;
 
