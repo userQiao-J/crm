@@ -43,4 +43,10 @@ public class RoleServiceImpl implements RoleService {
         roleMapper.deleteByPrimaryKey(Integer.parseInt(roleId));
         return RespBean.ok(msg);
     }
+
+    @Override
+    public Integer addRole(Role role) {
+        int result = roleMapper.insertSelective(role);
+        return result;
+    }
 }

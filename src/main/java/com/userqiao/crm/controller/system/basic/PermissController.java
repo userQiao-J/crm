@@ -62,4 +62,17 @@ public class PermissController extends BaseController {
         }
         return RespBean.error("更新失败");
     }
+
+    @PostMapping("/addRole")
+    @OperLog(operModul = "基础配置-权限组",operType = LOGCONST_ADD,operDesc = "添加角色信息")
+    public RespBean addRole(@RequestBody Role role){
+        if (!role.getName().startsWith("ROLE_")){
+            role.setName("ROLE_"+role.getName());
+        }
+        Integer result = roleService.addRole(role);
+        if (result > 0){
+            return RespBean.ok("添加成功");
+        }
+        return RespBean.error("添加失败");
+    }
 }

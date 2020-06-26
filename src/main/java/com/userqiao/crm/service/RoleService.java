@@ -24,4 +24,6 @@ public interface RoleService {
      * @param roleId
      */
     RespBean deleteRole(String roleId);
+
+    Integer addRole(Role role);
 }

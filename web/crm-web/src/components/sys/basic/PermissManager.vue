@@ -13,7 +13,11 @@
         v-model="role.nameZh"
         placeholder="请输入角色中文名称"
       ></el-input>
-      <el-button type="primary" size="small" icon="el-icon-plus"
+      <el-button
+        type="primary"
+        size="small"
+        icon="el-icon-plus"
+        @click="addRole"
         >添加角色</el-button
       >
     </div>
@@ -39,6 +43,7 @@
                 show-checkbox
                 node-key="id"
                 ref="tree"
+                :key="index"
                 :default-checked-keys="selectedMenus"
                 :data="allmenus"
                 :props="defaultProps"
@@ -132,6 +137,18 @@ export default {
     },
     exitUpdate() {
       this.activeName = -1;
+    },
+    addRole() {
+      this.postRequest("/system/basic/permiss/addRole", this.role).then(
+        resp => {
+          if (resp.status == 200) {
+            this.initRoles();
+            this.role.name = "";
+            this.role.nameZh = "";
+            this.$message.success(resp.msg);
+          }
+        }
+      );
     }
   }
 };
