@@ -36,6 +36,7 @@
                 style="float: right; padding: 3px 0;color: red"
                 icon="el-icon-delete"
                 type="text"
+                @click="deleteRole(r.id)"
               ></el-button>
             </div>
             <div>
@@ -145,6 +146,16 @@ export default {
             this.initRoles();
             this.role.name = "";
             this.role.nameZh = "";
+            this.$message.success(resp.msg);
+          }
+        }
+      );
+    },
+    deleteRole(rid) {
+      this.deleteRequest(`/system/basic/permiss/deleteRole/` + rid).then(
+        resp => {
+          if (resp.status == 200) {
+            this.initRoles();
             this.$message.success(resp.msg);
           }
         }
