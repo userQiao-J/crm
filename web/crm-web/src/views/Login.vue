@@ -76,7 +76,9 @@ export default {
                 JSON.stringify(resp.object)
               );
               let path = this.$route.query.redirect;
-              this.$router.replace((path == '/' || path == undefined) ? '/home' : path);
+              this.$router.replace(
+                path == "/" || path == undefined ? "/home" : path
+              );
             }
           });
         } else {

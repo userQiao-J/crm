@@ -52,7 +52,7 @@
           >
             欢迎来到CRM客户管理系统
           </div>
-          <router-view  style="margin-top: 10px"/>
+          <router-view style="margin-top: 10px" />
         </el-main>
       </el-container>
     </el-container>

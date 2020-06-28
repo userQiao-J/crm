@@ -1,11 +1,6 @@
 <template>
   <div style="width: 40%">
-    <el-tree
-      node-key="id"
-      ref="tree"
-      :props="defaultProps"
-      :data="allmenus"
-    >
+    <el-tree node-key="id" ref="tree" :props="defaultProps" :data="allmenus">
     </el-tree>
   </div>
 </template>

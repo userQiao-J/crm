@@ -2,19 +2,19 @@
   <div>
     <el-tabs v-model="activeName" type="card">
       <el-tab-pane label="菜单管理" name="menuManage">
-        <menu-manager/>
+        <menu-manager />
       </el-tab-pane>
       <el-tab-pane label="部门管理" name="depManage">
-        <dep-manage/>
+        <dep-manage />
       </el-tab-pane>
       <el-tab-pane label="权限管理" name="posManage">
-        <pos-manager/>
+        <pos-manager />
       </el-tab-pane>
       <el-tab-pane label="职称管理" name="jobLevelManage">
-        <job-level-manager/>
+        <job-level-manager />
       </el-tab-pane>
       <el-tab-pane label="权限组" name="permiss-manager">
-        <permiss-manager/>
+        <permiss-manager />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -34,8 +34,12 @@ export default {
       activeName: "menuManage"
     };
   },
-  components:{
-    DepManage,PosManager,JobLevelManager,MenuManager,PermissManager
+  components: {
+    DepManage,
+    PosManager,
+    JobLevelManager,
+    MenuManager,
+    PermissManager
   }
 };
 </script>
