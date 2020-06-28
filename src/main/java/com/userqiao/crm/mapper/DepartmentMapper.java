@@ -1,6 +1,9 @@
 package com.userqiao.crm.mapper;
 
 import com.userqiao.crm.model.Department;
+
+import java.util.List;
+
 /**
  * 部门 Mapper
  *
@@ -44,4 +47,10 @@ public interface DepartmentMapper {
      * @return
      */
     int updateByPrimaryKey(Department record);
+
+    /**
+     * 获取到所有部门信息
+     * @return
+     */
+    List<Department> getAllDepartmentByParentId(Integer parentId);
 }
