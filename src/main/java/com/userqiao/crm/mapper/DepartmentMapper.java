@@ -1,6 +1,7 @@
 package com.userqiao.crm.mapper;
 
 import com.userqiao.crm.model.Department;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -53,4 +54,12 @@ public interface DepartmentMapper {
      * @return
      */
     List<Department> getAllDepartmentByParentId(Integer parentId);
+
+    /**
+     * 设置部门是否为父级部门
+     * @param value
+     * @param Id
+     * @return
+     */
+    int setIsParentById(@Param("value") boolean value, @Param("id") Integer Id);
 }

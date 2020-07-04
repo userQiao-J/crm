@@ -41,6 +41,21 @@
         </span>
       </span>
     </el-tree>
+
+    <el-dialog title="添加子部门" :visible.sync="dialogVisible" width="30%">
+      <el-form :model="addDepObj" label-width="100px">
+        <el-form-item label="父级部门" prop="parentName">
+          <el-input v-model="addDepObj.parentName" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="子部门名称" prop="region">
+          <el-input v-model="addDepObj.name" />
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addDepManage">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -54,6 +69,12 @@ export default {
       defaultProps: {
         children: "children",
         label: "name"
+      },
+      dialogVisible: false,
+      addDepObj: {
+        parentId: "",
+        parentName: "",
+        name: ""
       }
     };
   },
@@ -69,7 +90,8 @@ export default {
     initDeps() {
       this.getRequest("/system/basic/department/").then(resp => {
         if (resp) {
-          this.deps = resp;
+          // this.deps = resp;
+          this.$set(this, "deps", resp);
         }
       });
     },
@@ -80,10 +102,22 @@ export default {
       return data.name.indexOf(value) !== -1;
     },
     showAddDevView(data) {
+      this.addDepObj.parentId = data.id;
+      this.addDepObj.parentName = data.name;
+      this.dialogVisible = true;
       console.log(data);
     },
     deleteDep(data) {
       console.log(data);
+    },
+    addDepManage() {
+      this.postRequest("/system/basic/department/", this.addDepObj).then(
+        resp => {
+          this.$message.success(resp.msg);
+          this.initDeps();
+        }
+      );
+      this.dialogVisible = false;
     }
   }
 };

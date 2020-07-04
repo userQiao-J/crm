@@ -7,4 +7,11 @@ import java.util.List;
 public interface DepartmentService {
 
     List<Department> getAllDepartmentByParentId();
+
+    /**
+     * 添加部门
+     * @param department
+     * @return
+     */
+    boolean addDepartment(Department department);
 }
