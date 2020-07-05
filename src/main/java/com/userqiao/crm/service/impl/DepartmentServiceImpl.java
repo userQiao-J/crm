@@ -3,6 +3,7 @@ package com.userqiao.crm.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.userqiao.crm.mapper.DepartmentMapper;
 import com.userqiao.crm.model.Department;
+import com.userqiao.crm.model.RespBean;
 import com.userqiao.crm.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,18 @@ public class DepartmentServiceImpl implements DepartmentService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public RespBean deleteDepartment(Integer id) {
+        List<Department> allDepartmentByParentId = departmentMapper.getAllDepartmentByParentId(id);
+        if (ObjectUtil.isNull(allDepartmentByParentId)||allDepartmentByParentId.size()>0){
+            return RespBean.error("该部门有子部门，不可删除！");
+        }
+        int result = departmentMapper.deleteByPrimaryKey(id);
+        if (result>0){
+            return RespBean.ok("删除成功");
+        }
+        return RespBean.error("删除失败");
     }
 }

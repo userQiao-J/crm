@@ -34,7 +34,7 @@
             type="danger"
             class="depBtn"
             size="mini"
-            @click="() => deleteDep(data)"
+            @click="deleteDep(data)"
           >
             删除部门
           </el-button>
@@ -108,6 +108,27 @@ export default {
       console.log(data);
     },
     deleteDep(data) {
+      this.$confirm("是否删除部门?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.deleteRequest("/system/basic/department/" + data.id).then(
+            resp => {
+              if (resp && resp.status == 200) {
+                this.initDeps();
+                this.$message.success(resp.msg);
+              }
+            }
+          );
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
       console.log(data);
     },
     addDepManage() {

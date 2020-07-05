@@ -44,4 +44,10 @@ public class DepartmentController extends BaseController {
         }
         return RespBean.error("添加失败");
     }
+
+    @DeleteMapping("/{id}")
+    @OperLog(operModul = "基础信息设置-部门管理",operType = LOGCONST_DELETE,operDesc = "删除部门信息")
+    public RespBean deleteDepartment(@PathVariable("id") Integer id){
+        return departmentService.deleteDepartment(id);
+    }
 }
