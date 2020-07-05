@@ -33,4 +33,12 @@ public interface MenuService {
     RespBean getMidsByRid(Integer rid);
 
     boolean updateMenuRole(Integer rid, Integer[] mids);
+
+    Menu getMenuById(Integer mid);
+
+    /**
+     * 添加菜单
+     * @return
+     */
+    RespBean addMenu(Menu menu);
 }

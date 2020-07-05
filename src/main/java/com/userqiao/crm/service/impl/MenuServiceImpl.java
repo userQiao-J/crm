@@ -51,11 +51,25 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean updateMenuRole(Integer rid, Integer[] mids) {
         roleMenuService.deleteRoleMenuByRoleId(Integer.toString(rid));
         Integer result = roleMenuService.insertRecorId(rid, mids);
         // 如果添加响应的行数为数组的大小 就证明添加成功
         return result == mids.length;
+    }
+
+    @Override
+    public Menu getMenuById(Integer mid) {
+        return menuMapper.selectByPrimaryKey(mid);
+    }
+
+    @Override
+    public RespBean addMenu(Menu menu) {
+        int resp = menuMapper.insertSelective(menu);
+        if(resp> 0){
+            return RespBean.ok("添加成功");
+        }
+        return RespBean.error("添加失败");
     }
 }

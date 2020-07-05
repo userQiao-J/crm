@@ -139,16 +139,10 @@
             <if test="name != null">
                 name,
             </if>
-            <if test="iconcls != null">
+            <if test="iconCls != null">
                 iconCls,
             </if>
-            <if test="keepalive != null">
-                keepAlive,
-            </if>
-            <if test="requireauth != null">
-                requireAuth,
-            </if>
-            <if test="parentid != null">
+            <if test="parentId != null">
                 parentId,
             </if>
             <if test="enabled != null">
@@ -171,17 +165,11 @@
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
-            <if test="iconcls != null">
-                #{iconcls,jdbcType=VARCHAR},
+            <if test="iconCls != null">
+                #{iconCls,jdbcType=VARCHAR},
             </if>
-            <if test="keepalive != null">
-                #{keepalive,jdbcType=BIT},
-            </if>
-            <if test="requireauth != null">
-                #{requireauth,jdbcType=BIT},
-            </if>
-            <if test="parentid != null">
-                #{parentid,jdbcType=INTEGER},
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
             </if>
             <if test="enabled != null">
                 #{enabled,jdbcType=BIT},
