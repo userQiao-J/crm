@@ -16,20 +16,21 @@
           <span>{{ node.label }}</span>
           <span v-if="node.label != '所有'">
             <el-button
+                    type="success"
+                    size="mini"
+                    @click="() => addMenu(data)"
+                    class="depBtn"
+                    v-if="data.url == '/'"
+            >
+              添加下级菜单
+            </el-button>
+            <el-button
               type="primary"
               size="mini"
               @click="() => showInfo(data)"
               class="depBtn"
             >
               查看菜单
-            </el-button>
-            <el-button
-              type="success"
-              size="mini"
-              @click="() => addMenu(data)"
-              class="depBtn"
-            >
-              添加下级菜单
             </el-button>
             <el-button
               type="danger"
@@ -103,7 +104,7 @@ export default {
         this.showMenuInfo = true;
       });
     },
-    addMenu(data){
+    addMenu(data) {
       this.$set(this, "selectMenu", data);
       this.$set(this, "showMenuInfoType", 2);
       this.showMenuInfo = false;

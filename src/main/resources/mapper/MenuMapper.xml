@@ -44,12 +44,15 @@
     <resultMap id="MenuWithChildren" type="com.userqiao.crm.model.Menu" extends="BaseResultMap">
         <id column="id1" property="id"/>
         <result column="name1" property="name"/>
+        <result column="url1" property="url"/>
         <collection property="children" ofType="com.userqiao.crm.model.Menu">
             <id column="id2" property="id"/>
             <result column="name2" property="name"/>
+            <result column="url2" property="url"/>
             <collection property="children" ofType="com.userqiao.crm.model.Menu">
                 <id column="id3" property="id"/>
                 <result column="name3" property="name"/>
+                <result column="url3" property="url"/>
             </collection>
         </collection>
     </resultMap>
@@ -72,7 +75,9 @@
         order by m.id
     </select>
     <select id="getAllMenus" resultMap="MenuWithChildren">
-        SELECT m1.id as id1, m1.name as name1, m2.id as id2, m2.name as name2, m3.id as id3, m3.name as name3
+        SELECT m1.id as id1, m1.name as name1,m1.url as url1,
+         m2.id as id2, m2.name as name2,m2.url as url2,
+          m3.id as id3, m3.name as name3,m3.url as url3
         FROM menu m1,
              menu m2,
              menu m3
