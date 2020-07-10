@@ -39,8 +39,20 @@ public class MenuController extends BaseController {
     }
 
     @PostMapping("/")
-    @OperLog(operModul = "基础信息设置-菜单管理")
+    @OperLog(operModul = "基础信息设置-菜单管理", operType = LOGCONST_ADD,operDesc = "添加下级菜单")
     public RespBean addMenu(@RequestBody Menu menu) {
         return menuService.addMenu(menu);
+    }
+
+    @PutMapping("/")
+    @OperLog(operModul = "基础信息设置-菜单管理",operType = LOGCONST_UPDATE,operDesc = "修改菜单信息")
+    public RespBean updateMenu(@RequestBody Menu menu){
+        return menuService.updateMenu(menu);
+    }
+
+    @DeleteMapping("/{mid}")
+    @OperLog(operModul = "基础信息-菜单管理",operType = LOGCONST_DELETE,operDesc = "删除菜单信息")
+    public RespBean deleteMenu(@PathVariable("mid") Integer mid){
+        return menuService.deleteMenu(mid);
     }
 }

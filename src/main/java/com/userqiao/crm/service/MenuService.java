@@ -41,4 +41,18 @@ public interface MenuService {
      * @return
      */
     RespBean addMenu(Menu menu);
+
+    /**
+     * 修改菜单信息
+     * @param menu
+     * @return
+     */
+    RespBean updateMenu(Menu menu);
+
+    /**
+     * 根据菜单ID删除菜单信息
+     * @param mid
+     * @return
+     */
+    RespBean deleteMenu(Integer mid);
 }

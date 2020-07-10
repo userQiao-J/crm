@@ -104,32 +104,45 @@ export default {
     };
   },
   mounted() {
-    if (this.type == 1) {
-      // 显示当前菜单信息
-      console.log(this.menu);
-      // this.menuForm = this.menu;
-      this.getRequest("/system/basic/menu/" + this.menu.id).then(resp => {
-        if (resp && resp.status == 200) {
-          this.menuForm = resp.object;
-        }
-      });
-    } else if (this.type == 2) {
-      console.log(this.menu);
-      this.$set(this.menuForm, "parentId", this.menu.id);
-      this.$set(this.menuForm, "parentName", this.menu.name);
-    }
+    this.initMenu();
   },
   methods: {
+    initMenu(){
+      if (this.type == 1) {
+        // 显示当前菜单信息
+        console.log(this.menu);
+        // this.menuForm = this.menu;
+        this.getRequest("/system/basic/menu/" + this.menu.id).then(resp => {
+          if (resp && resp.status == 200) {
+            this.menuForm = resp.object;
+          }
+        });
+      } else if (this.type == 2) {
+        console.log(this.menu);
+        this.$set(this.menuForm, "parentId", this.menu.id);
+        this.$set(this.menuForm, "parentName", this.menu.name);
+      }
+    },
     submitForm() {
       this.$refs["menuform"].validate(valid => {
         if (!valid) {
           return;
         }
-        this.postRequest("/system/basic/menu/", this.menuForm).then(resp => {
-          if (resp && resp.status == 200) {
-            this.$message.success(resp.msg);
-          }
-        });
+        if (this.type == 1) {
+          this.putRequest("/system/basic/menu/", this.menuForm).then(resp => {
+            if (resp && resp.status == 200) {
+              this.$emit("initMenu");
+              this.$message.success(resp.msg);
+            }
+          });
+        } else if (this.type == 2) {
+          this.postRequest("/system/basic/menu/", this.menuForm).then(resp => {
+            if (resp && resp.status == 200) {
+              this.$emit("initMenu");
+              this.$message.success(resp.msg);
+            }
+          });
+        }
       });
     }
   }

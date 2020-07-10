@@ -72,4 +72,19 @@ public class MenuServiceImpl implements MenuService {
         }
         return RespBean.error("添加失败");
     }
+
+    @Override
+    public RespBean updateMenu(Menu menu) {
+        int resp = menuMapper.updateByPrimaryKeySelective(menu);
+        if(resp> 0){
+            return RespBean.ok("修改成功");
+        }
+        return RespBean.error("修改失败");
+    }
+
+    @Override
+    public RespBean deleteMenu(Integer mid) {
+
+        return null;
+    }
 }

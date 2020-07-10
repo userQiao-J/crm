@@ -196,17 +196,11 @@
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="iconcls != null">
-                iconCls = #{iconcls,jdbcType=VARCHAR},
+            <if test="iconCls != null">
+                iconCls = #{iconCls,jdbcType=VARCHAR},
             </if>
-            <if test="keepalive != null">
-                keepAlive = #{keepalive,jdbcType=BIT},
-            </if>
-            <if test="requireauth != null">
-                requireAuth = #{requireauth,jdbcType=BIT},
-            </if>
-            <if test="parentid != null">
-                parentId = #{parentid,jdbcType=INTEGER},
+            <if test="parentId != null">
+                parentId = #{parentId,jdbcType=INTEGER},
             </if>
             <if test="enabled != null">
                 enabled = #{enabled,jdbcType=BIT},

@@ -61,6 +61,7 @@
         :menu="selectMenu"
         v-if="showMenuInfo"
         :type="showMenuInfoType"
+        @initMenu="initAllMenus"
       ></MenuInfo>
     </el-card>
   </div>
