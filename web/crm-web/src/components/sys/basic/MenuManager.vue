@@ -14,13 +14,13 @@
           style="display: flex;justify-content: space-between;width: 100%"
         >
           <span>{{ node.label }}</span>
-          <span v-if="node.label != '所有'">
+          <span>
             <el-button
-                    type="success"
-                    size="mini"
-                    @click="() => addMenu(data)"
-                    class="depBtn"
-                    v-if="data.url == '/'"
+              type="success"
+              size="mini"
+              @click="() => addMenu(data)"
+              class="depBtn"
+              v-if="data.url == '/'"
             >
               添加下级菜单
             </el-button>
@@ -29,14 +29,16 @@
               size="mini"
               @click="() => showInfo(data)"
               class="depBtn"
+              v-if="node.label != '所有'"
             >
               查看菜单
             </el-button>
             <el-button
               type="danger"
               size="mini"
-              @click="() => remove(node, data)"
+              @click="() => deleteMenu(data)"
               class="depBtn"
+              v-if="node.label != '所有'"
             >
               删除菜单
             </el-button>
@@ -112,6 +114,28 @@ export default {
       this.$nextTick(() => {
         this.showMenuInfo = true;
       });
+    },
+    deleteMenu(data) {
+      console.log(data);
+      this.$confirm("是否删除改目录?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.deleteRequest("/system/basic/menu/" + data.id).then(resp => {
+            if (resp && resp.status == 200) {
+              this.initAllMenus();
+              this.$message.success(resp.msg);
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     }
   }
 };

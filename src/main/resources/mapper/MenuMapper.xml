@@ -89,6 +89,9 @@
     <select id="getMidsByRid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
         select mid from  menu_role where rid = #{rid,jdbcType=INTEGER}
     </select>
+    <select id="getCountByParentId" resultType="java.lang.Integer">
+        select count(1) from menu where parentId=#{mid,jdbcType=INTEGER}
+    </select>
     <select id="getMenusByUserId" parameterType="java.lang.Integer" resultMap="Menus2">
         select  distinct m1.*,
                         m2.`id`          as id2,

@@ -18,4 +18,9 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     public Integer insertRecorId(Integer rid, Integer[] mids) {
         return menuRoleMapper.insertRecorId(rid,mids);
     }
+
+    @Override
+    public Integer getCountByMid(Integer mid) {
+        return menuRoleMapper.getCountByMid(mid);
+    }
 }

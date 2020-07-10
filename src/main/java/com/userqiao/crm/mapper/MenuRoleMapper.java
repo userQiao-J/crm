@@ -50,4 +50,6 @@ public interface MenuRoleMapper {
     int deleteByRoleId(Integer roleId);
 
     Integer insertRecorId(@Param("rid") Integer rid, @Param("mids") Integer[] mids);
+
+    Integer getCountByMid(Integer mid);
 }

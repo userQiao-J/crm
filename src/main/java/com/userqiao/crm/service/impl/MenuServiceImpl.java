@@ -84,7 +84,15 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public RespBean deleteMenu(Integer mid) {
-
-        return null;
+        if (menuMapper.getCountByParentId(mid)>0){
+            return RespBean.error("该菜单有子菜单，不可删除");
+        }
+        if (roleMenuService.getCountByMid(mid)>0){
+            return RespBean.error("存在角色绑定该菜单，不可删除");
+        }
+        if (menuMapper.deleteByPrimaryKey(mid)>0){
+            return RespBean.ok("删除成功");
+        }
+        return RespBean.error("删除失败");
     }
 }

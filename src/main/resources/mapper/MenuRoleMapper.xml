@@ -15,6 +15,9 @@
     from menu_role
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getCountByMid" resultType="java.lang.Integer">
+    select count(1) from menu_role where mid=#{mid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from menu_role
     where id = #{id,jdbcType=INTEGER}

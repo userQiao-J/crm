@@ -1,5 +1,7 @@
 package com.userqiao.crm.service;
 
+import io.swagger.models.auth.In;
+
 /**
  * @author userqiao
  * @Title: RoleMenuService
@@ -15,4 +17,11 @@ public interface RoleMenuService {
     void deleteRoleMenuByRoleId(String roleId);
 
     Integer insertRecorId(Integer rid, Integer[] mids);
+
+    /**
+     * 根据菜单ID获取存在记录的条数
+     * @param mid
+     * @return
+     */
+    Integer getCountByMid(Integer mid);
 }
