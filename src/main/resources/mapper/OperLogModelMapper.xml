@@ -38,6 +38,14 @@
     select
     <include refid="Base_Column_List" />
     from oper_log
+    order by oper_create_time_ desc
+  </select>
+  <select id="selectLogByUser" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    from oper_log
+    where oper_user_id_=#{userId,jdbcType=INTEGER}
+    order by oper_create_time_ desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from oper_log
@@ -212,4 +220,8 @@
       oper_ver_ = #{operVer,jdbcType=VARCHAR}
     where oper_id_ = #{operId,jdbcType=VARCHAR}
   </update>
+
+  <delete id="cleanLog">
+     delete from oper_log
+  </delete>
 </mapper>

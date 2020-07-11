@@ -10,6 +10,7 @@ import { putRequest } from "./utils/api";
 import { getRequest } from "./utils/api";
 import { deleteRequest } from "./utils/api";
 import { initMenu } from "./utils/menus";
+import moment from 'moment'
 
 Vue.config.productionTip = false;
 Vue.prototype.postRequest = postRequest;
@@ -21,6 +22,11 @@ Vue.prototype.deleteRequest = deleteRequest;
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 
+Vue.use(require('vue-moment'));
+Vue.prototype.moment = moment
+Vue.filter('dateYMDHMSFormat',function(dateStr,pattern='YYYY-MM-DD HH:mm:ss'){
+  return moment(dateStr).format(pattern);
+})
 router.beforeEach((to, from, next) => {
   if (to.path == "/") {
     next();

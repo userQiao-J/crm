@@ -20,4 +20,8 @@ public interface OperLogModelMapper {
     int updateByPrimaryKeyWithBLOBs(OperLogModel record);
 
     int updateByPrimaryKey(OperLogModel record);
+
+    List<OperLogModel> selectLogByUser(Integer userId);
+
+    int cleanLog();
 }
